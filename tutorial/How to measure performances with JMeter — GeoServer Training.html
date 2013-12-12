@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>How to measure performances with JMeter — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/jquery.js"></script>
+    <script type="text/javascript" src="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/underscore.js"></script>
+    <script type="text/javascript" src="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="http://geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="Advanced GeoServer Configuration" href="http://geoserver.geo-solutions.it/edu/en/adv_gsconfig/index.html">
+    <link rel="next" title="INSPIRE Support" href="http://geoserver.geo-solutions.it/edu/en/inspire/index.html">
+    <link rel="prev" title="Control flow module" href="http://geoserver.geo-solutions.it/edu/en/adv_gsconfig/controlflow.html">
+    
+
+  </head>
+  <body>
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="http://www.geo-solutions.it/"><img src="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://plus.google.com/u/0/100131944378031878024/posts" id="gplus">Google+</a></li>
+					<li><a href="http://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="http://geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="http://geoserver.geo-solutions.it/edu/en/adv_gsconfig/controlflow.html" title="previous chapter">Control flow module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="http://geoserver.geo-solutions.it/edu/en/inspire/index.html" title="next chapter">INSPIRE Support</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="http://geoserver.geo-solutions.it/edu/en/_sources/adv_gsconfig/jmeter.txt" rel="nofollow">Show Source</a></li>
+  </ul>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="how-to-measure-performances-with-jmeter">
+<span id="geoserver-jmeter"></span><h1>How to measure performances with JMeter<a class="headerlink" href="#how-to-measure-performances-with-jmeter" title="Permalink to this headline">¶</a></h1>
+<p>Apache JMeter is a Java desktop application open source, built to 
+load test functional behavior and measure performance. In this section 
+will learn how to run the performance test using jMeter in order to 
+evaluate the GeoServer performances when serving WMS requests.
+The performance test are aimed to stress the server itself and evaluate 
+the behavior of the response time and throughput with an increasing 
+number of simulated users sending concurrent request to the server.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Ideally, to avoid making the server and make it more plausible tests, JMeter should run on a different machine.</p>
+</div>
+<ol class="arabic">
+<li><p class="first">Go to <tt class="docutils literal"><span class="pre">/workshop/data/jakarta-jmeter-2.3.4/bin</span></tt> directory and run the <strong>jmeter</strong> shell script:</p>
+<div class="figure align-center">
+<img alt="../_images/jmeter1.png" src="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/jmeter1.png">
+<p class="caption"><em>Running jMeter</em></p>
+</div>
+<div class="figure align-center">
+<img alt="../_images/jmeter2.png" src="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/jmeter2.png">
+<p class="caption"><em>jMeter interface</em></p>
+</div>
+</li>
+<li><p class="first">Add a new <strong>Thread Group</strong> with the mouse right click on <tt class="docutils literal"><span class="pre">Test</span> <span class="pre">Plan</span></tt> tree node:</p>
+<div class="figure align-center">
+<img alt="../_images/jmeter3.png" src="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/jmeter3.png">
+<p class="caption"><em>Adding a new ``Thread Group``</em></p>
+</div>
+</li>
+<li><p class="first">Add a new <strong>Loop Controller</strong> with the mouse right click on <tt class="docutils literal"><span class="pre">Thread</span> <span class="pre">Group</span></tt> tree node:</p>
+<div class="figure align-center">
+<img alt="../_images/jmeter4.png" src="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/jmeter4.png">
+<p class="caption"><em>Adding a new ``Loop Controlle``</em></p>
+</div>
+</li>
+<li><p class="first">In the <tt class="docutils literal"><span class="pre">Thread</span> <span class="pre">Group</span></tt>
+ window enter the number of thread for the test (this represents the 
+number of simultaneous requests that are made to GeoServer). After chek <tt class="docutils literal"><span class="pre">Forever</span></tt> on <strong>Loop Count</strong> field and the request frequency second in <strong>Rump-Ip Period</strong> field.</p>
+<div class="figure align-center">
+<img alt="../_images/jmeter14.png" src="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/jmeter14.png">
+<p class="caption"><em>Setting the ``Thread Group``</em></p>
+</div>
+</li>
+<li><p class="first">Add a new <strong>HTTP Request</strong> element with the mouse right click on <tt class="docutils literal"><span class="pre">Loop</span> <span class="pre">Controller</span></tt> tree node:</p>
+<div class="figure align-center">
+<img alt="../_images/jmeter5.png" src="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/jmeter5.png">
+<p class="caption"><em>Adding a new ``HTTP Request``</em></p>
+</div>
+</li>
+<li><p class="first">Add the following elements with the mouse right click on <tt class="docutils literal"><span class="pre">Thread</span> <span class="pre">Group</span></tt> tree node:</p>
+<div class="figure align-center">
+<img alt="../_images/jmeter8.png" src="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/jmeter8.png">
+<p class="caption"><em>Adding a new HTTP Request Default</em></p>
+</div>
+<div class="figure align-center">
+<img alt="../_images/jmeter7.png" src="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/jmeter7.png">
+<p class="caption"><em>Adding a ``Listeners``</em></p>
+</div>
+</li>
+<li><p class="first">In the <strong>HTTP Request Default</strong> enter the following configuration:</p>
+<div class="figure align-center">
+<img alt="../_images/jmeter9.png" src="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/jmeter9.png">
+<p class="caption"><em>``HTTP Request Default`` configuration</em></p>
+</div>
+</li>
+</ol>
+<p>At this point jMeter is configured to run a GeoServer performance test:</p>
+<ol class="arabic">
+<li><p class="first">Select on <strong>Thread Group</strong> tree node and afted click on <tt class="docutils literal"><span class="pre">Run</span></tt> tool and select <strong>Start</strong> to startig the jMeter test.</p>
+<div class="figure align-center">
+<img alt="../_images/jmeter13.png" src="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/jmeter13.png">
+<p class="caption"><em>sterting jMeter test</em></p>
+</div>
+</li>
+<li><p class="first">Select <tt class="docutils literal"><span class="pre">View</span> <span class="pre">Results</span> <span class="pre">Tree</span></tt> to directly see the request informations produced and the request result:</p>
+<div class="figure align-center">
+<img alt="../_images/jmeter15.png" src="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/jmeter15.png">
+<p class="caption"><em>``View Results Tree`` panel</em></p>
+</div>
+</li>
+<li><p class="first">Select <tt class="docutils literal"><span class="pre">Aggregate</span> <span class="pre">Graph</span></tt> to view the statistical information about the requests:</p>
+<div class="figure align-center">
+<img alt="../_images/jmeter19.png" src="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/jmeter19.png">
+<p class="caption"><em>``Aggregate Graph`` panel</em></p>
+</div>
+</li>
+<li><p class="first">Select <tt class="docutils literal"><span class="pre">Spline</span> <span class="pre">Visualizer</span></tt> to analyze the technical trend of the requests:</p>
+<div class="figure align-center">
+<img alt="../_images/jmeter17.png" src="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/jmeter17.png">
+<p class="caption"><em>``Spline Visualizer`` panel</em></p>
+</div>
+</li>
+<li><p class="first">Select <tt class="docutils literal"><span class="pre">Summary</span> <span class="pre">Report</span></tt> to see the main data of interest relating to pending requests:</p>
+<div class="figure align-center">
+<img alt="../_images/jmeter18.png" src="How%20to%20measure%20performances%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_files/jmeter18.png">
+<p class="caption"><em>``Summary Report`` panel</em></p>
+</div>
+</li>
+</ol>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="http://geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="http://geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="http://geoserver.geo-solutions.it/edu/en/inspire/index.html" title="INSPIRE Support" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="http://geoserver.geo-solutions.it/edu/en/adv_gsconfig/controlflow.html" title="Control flow module" accesskey="P">previous</a> |</li>
+        <li><a href="http://geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="http://geoserver.geo-solutions.it/edu/en/adv_gsconfig/index.html" accesskey="U">Advanced GeoServer Configuration</a> »</li>
+        <li><a href="#">How to measure performances with JMeter</a></li>
+      </ul>
+    </div>
+
+    <div class="footer">
+        © Copyright 2013, GeoSolutions.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  
+</body></html>

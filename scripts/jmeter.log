@@ -1,0 +1,82 @@
+2013/12/11 10:28:35 INFO  - jmeter.util.JMeterUtils: Setting Locale to en_US 
+2013/12/11 10:28:35 INFO  - jmeter.JMeter: Loading user properties from: /home/zicke/Apps/apache-jmeter-2.10/bin/user.properties 
+2013/12/11 10:28:35 INFO  - jmeter.JMeter: Loading system properties from: /home/zicke/Apps/apache-jmeter-2.10/bin/system.properties 
+2013/12/11 10:28:35 INFO  - jmeter.JMeter: Copyright (c) 1998-2013 The Apache Software Foundation 
+2013/12/11 10:28:35 INFO  - jmeter.JMeter: Version 2.10 r1533061 
+2013/12/11 10:28:35 INFO  - jmeter.JMeter: java.version=1.7.0_25 
+2013/12/11 10:28:35 INFO  - jmeter.JMeter: java.vm.name=Java HotSpot(TM) 64-Bit Server VM 
+2013/12/11 10:28:35 INFO  - jmeter.JMeter: os.name=Linux 
+2013/12/11 10:28:35 INFO  - jmeter.JMeter: os.arch=amd64 
+2013/12/11 10:28:35 INFO  - jmeter.JMeter: os.version=2.6.32-47-server 
+2013/12/11 10:28:35 INFO  - jmeter.JMeter: file.encoding=UTF-8 
+2013/12/11 10:28:35 INFO  - jmeter.JMeter: Default Locale=English (United States) 
+2013/12/11 10:28:35 INFO  - jmeter.JMeter: JMeter  Locale=English (United States) 
+2013/12/11 10:28:35 INFO  - jmeter.JMeter: JMeterHome=/home/zicke/Apps/apache-jmeter-2.10 
+2013/12/11 10:28:35 INFO  - jmeter.JMeter: user.dir  =/home/zicke/Projekte/wms_benchmark/scripts 
+2013/12/11 10:28:35 INFO  - jmeter.JMeter: PWD       =/home/zicke/Projekte/wms_benchmark/scripts 
+2013/12/11 10:28:35 INFO  - jmeter.JMeter: IP: 144.76.82.106 Name: Ubuntu-1004-lucid-64-minimal FullName: Ubuntu-1004-lucid-64-minimal 
+2013/12/11 10:28:35 INFO  - jmeter.JMeter: Loaded icon properties from org/apache/jmeter/images/icon.properties 
+2013/12/11 10:28:36 INFO  - jmeter.engine.util.CompoundVariable: Note: Function class names must contain the string: '.functions.' 
+2013/12/11 10:28:36 INFO  - jmeter.engine.util.CompoundVariable: Note: Function class names must not contain the string: '.gui.' 
+2013/12/11 10:28:36 INFO  - jmeter.gui.action.LookAndFeelCommand: Using look and feel: javax.swing.plaf.metal.MetalLookAndFeel [Metal, CrossPlatform] 
+2013/12/11 10:28:37 INFO  - jmeter.util.BSFTestElement: Registering JMeter version of JavaScript engine as work-round for BSF-22 
+2013/12/11 10:28:37 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Cannot find .className property for htmlParser, using default 
+2013/12/11 10:28:37 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/html is  
+2013/12/11 10:28:37 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for application/xhtml+xml is  
+2013/12/11 10:28:37 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for application/xml is  
+2013/12/11 10:28:37 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/xml is  
+2013/12/11 10:28:37 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser 
+2013/12/11 10:28:37 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.protocol.http.control.gui.WebServiceSamplerGui 
+2013/12/11 10:28:37 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.protocol.http.modifier.gui.ParamModifierGui 
+2013/12/11 10:28:37 INFO  - jmeter.protocol.http.proxy.ProxyControl: HTTP(S) Test Script Recorder SSL Proxy will use keys that support embedded 3rd party resources in file /home/zicke/Apps/apache-jmeter-2.10/bin/proxyserver.jks 
+2013/12/11 10:28:38 INFO  - jmeter.samplers.SampleResult: Note: Sample TimeStamps are START times 
+2013/12/11 10:28:38 INFO  - jmeter.samplers.SampleResult: sampleresult.default.encoding is set to ISO-8859-1 
+2013/12/11 10:28:38 INFO  - jmeter.samplers.SampleResult: sampleresult.useNanoTime=true 
+2013/12/11 10:28:38 INFO  - jmeter.samplers.SampleResult: sampleresult.nanoThreadSleep=5000 
+2013/12/11 10:28:44 INFO  - jmeter.services.FileServer: Default base='/home/zicke/Projekte/wms_benchmark/scripts' 
+2013/12/11 10:28:44 INFO  - jmeter.gui.action.Load: Loading file: /home/zicke/Projekte/wms_benchmark/sogis-avwms-wms-21781.jmx 
+2013/12/11 10:28:44 INFO  - jmeter.services.FileServer: Set new base='/home/zicke/Projekte/wms_benchmark' 
+2013/12/11 10:28:44 INFO  - jmeter.save.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2 
+2013/12/11 10:28:44 INFO  - jmeter.save.SaveService: Using SaveService properties file encoding UTF-8 
+2013/12/11 10:28:44 INFO  - jmeter.save.SaveService: Using SaveService properties version 2.5 
+2013/12/11 10:28:44 INFO  - jmeter.save.SaveService: Using SaveService properties file version 1519088 
+2013/12/11 10:28:44 INFO  - jmeter.save.SaveService: All converter versions present and correct 
+2013/12/11 10:28:44 INFO  - jmeter.services.FileServer: Set new base='/home/zicke/Projekte/wms_benchmark' 
+2013/12/11 10:29:18 INFO  - jmeter.engine.StandardJMeterEngine: Listeners will be started after enabling running version 
+2013/12/11 10:29:18 INFO  - jmeter.engine.StandardJMeterEngine: To revert to the earlier behaviour, define jmeterengine.startlistenerslater=false 
+2013/12/11 10:29:18 INFO  - jmeter.engine.StandardJMeterEngine: Running the test! 
+2013/12/11 10:29:18 INFO  - jmeter.samplers.SampleEvent: List of sample_variables: [] 
+2013/12/11 10:29:18 INFO  - jmeter.samplers.SampleEvent: List of sample_variables: [] 
+2013/12/11 10:29:18 INFO  - jmeter.gui.util.JMeterMenuBar: setRunning(true,*local*) 
+2013/12/11 10:29:18 INFO  - jmeter.engine.StandardJMeterEngine: Starting ThreadGroup: 1 : 1 
+2013/12/11 10:29:18 INFO  - jmeter.engine.StandardJMeterEngine: Starting 1 threads for group 1. 
+2013/12/11 10:29:18 INFO  - jmeter.engine.StandardJMeterEngine: Thread will continue on error 
+2013/12/11 10:29:18 INFO  - jmeter.threads.ThreadGroup: Starting thread group number 1 threads 1 ramp-up 1 perThread 1000.0 delayedStart=false 
+2013/12/11 10:29:18 INFO  - jmeter.threads.JMeterThread: jmeterthread.startearlier=true (see jmeter.properties) 
+2013/12/11 10:29:18 INFO  - jmeter.threads.JMeterThread: Running PostProcessors in forward order 
+2013/12/11 10:29:18 INFO  - jmeter.threads.ThreadGroup: Started thread group number 1 
+2013/12/11 10:29:18 INFO  - jmeter.engine.StandardJMeterEngine: All thread groups have been started 
+2013/12/11 10:29:18 INFO  - jmeter.threads.JMeterThread: Thread started: 1 1-1 
+2013/12/11 10:29:18 INFO  - jmeter.services.FileServer: Stored: /home/zicke/Projekte/wms_benchmark/csv/21781_grundbuchplan.csv 
+2013/12/11 10:29:18 INFO  - jmeter.protocol.http.sampler.HTTPJavaImpl: Maximum connection retries = 10 
+2013/12/11 10:29:36 INFO  - jmeter.threads.JMeterThread: Thread finished: 1 1-1 
+2013/12/11 10:29:36 INFO  - jmeter.engine.StandardJMeterEngine: Notifying test listeners of end of test 
+2013/12/11 10:29:36 INFO  - jmeter.services.FileServer: Close: /home/zicke/Projekte/wms_benchmark/csv/21781_grundbuchplan.csv 
+2013/12/11 10:29:36 INFO  - jmeter.reporters.Summariser: Generate Summary Results =    100 in    18s =    5.6/s Avg:   163 Min:   101 Max:   283 Err:     0 (0.00%) 
+2013/12/11 10:29:36 INFO  - jmeter.gui.util.JMeterMenuBar: setRunning(false,*local*) 
+2013/12/11 10:30:28 INFO  - jmeter.engine.StandardJMeterEngine: Running the test! 
+2013/12/11 10:30:28 INFO  - jmeter.samplers.SampleEvent: List of sample_variables: [] 
+2013/12/11 10:30:28 INFO  - jmeter.gui.util.JMeterMenuBar: setRunning(true,*local*) 
+2013/12/11 10:30:28 INFO  - jmeter.engine.StandardJMeterEngine: Starting ThreadGroup: 1 : 1 
+2013/12/11 10:30:28 INFO  - jmeter.engine.StandardJMeterEngine: Starting 1 threads for group 1. 
+2013/12/11 10:30:28 INFO  - jmeter.engine.StandardJMeterEngine: Thread will continue on error 
+2013/12/11 10:30:28 INFO  - jmeter.threads.ThreadGroup: Starting thread group number 1 threads 1 ramp-up 1 perThread 1000.0 delayedStart=false 
+2013/12/11 10:30:28 INFO  - jmeter.threads.ThreadGroup: Started thread group number 1 
+2013/12/11 10:30:28 INFO  - jmeter.engine.StandardJMeterEngine: All thread groups have been started 
+2013/12/11 10:30:28 INFO  - jmeter.threads.JMeterThread: Thread started: 1 1-1 
+2013/12/11 10:30:28 INFO  - jmeter.services.FileServer: Stored: /home/zicke/Projekte/wms_benchmark/csv/21781_grundbuchplan.csv 
+2013/12/11 10:32:25 INFO  - jmeter.threads.JMeterThread: Thread finished: 1 1-1 
+2013/12/11 10:32:25 INFO  - jmeter.engine.StandardJMeterEngine: Notifying test listeners of end of test 
+2013/12/11 10:32:25 INFO  - jmeter.services.FileServer: Close: /home/zicke/Projekte/wms_benchmark/csv/21781_grundbuchplan.csv 
+2013/12/11 10:32:25 INFO  - jmeter.reporters.Summariser: Generate Summary Results =    100 in   117s =    0.9/s Avg:  1161 Min:   211 Max:  7542 Err:     0 (0.00%) 
+2013/12/11 10:32:25 INFO  - jmeter.gui.util.JMeterMenuBar: setRunning(false,*local*) 
