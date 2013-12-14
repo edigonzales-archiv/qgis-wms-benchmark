@@ -1,0 +1,357 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Shower Presentation Engine</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Shower Presentation Engine</h1>
+		<p>Yours Truly, Famous Inc.</p>
+	</header>
+	<section class="slide cover" id="Cover"><div>
+		<h2>QGIS Server vs. QGIS Server</h2>
+		<p>QGIS server benchmarking<br>Stefan Ziegler&mdash;Amt für Geoinformation Kanton Solothurn</p>
+		<img src="pictures/cover.jpg" alt="">
+		<!--
+			To apply styles to the certain slides
+			set slide ID to get needed elements
+			-->
+		<style>
+			#Cover h2 {
+				margin:30px 0 0;
+				color:#FFF;
+				text-align:center;
+				font-size:70px;
+				}
+			#Cover p {
+				margin:10px 0 0;
+				text-align:center;
+				color:#FFF;
+				font-style:italic;
+				font-size:20px;
+				}
+				#Cover p a {
+					color:#FFF;
+				}
+		</style>
+	</div></section>
+	
+	<section class="slide"><div>
+		<h2>Motivation</h2>
+		<ul>
+			<li>QGIS Server ist schnell: <a href="http://sourcepole.ch/assets/2013/6/17/fossgis_2013_performanceoptimierte_wms_dienste.pdf">Präsentation FOSSGIS 2013</a></li>
+			<li><b>Verdacht:</b> Performance geringer, falls Layer kaskadiert werden.</li>
+			<li>Kennenlernen von Apache JMeter</li>
+		</ul>
+	</div></section>
+	
+	<section class="slide"><div>
+		<h2>Apache JMeter</h2>
+		<ul>
+			<li>Java-Programm zum Ausführen von Lasttests.</li>
+			<li>Simulation von parallelen Anfragen, um Skalierbarkeit zu testen.</li>
+			<li>Verwendet für WMS-Shootouts an der FOSS4G.</li>
+			<li>Werte für GET-Parameter (z.B. <i>BBOX</i>, <i>WIDTH</i> und <i>HEIGHT</i>) können aus CSV-Datei mit zuvor erzeugten zufälligen Werten entnommen werden.</li>
+		</ul>
+	</div></section>
+	
+	<section class="slide"><div>
+		<h2>Kaskadieren?</h2>
+		<ul>
+			<li>Häufig benutzte Grundlagen- resp. Hintergrundkarten werden <strong>einmalig</strong> erstellt und über <strong>eine</strong> Schnittstelle (WMS) zur Verfügung gestellt.</li>
+			<li>Orthofoto / Basisplan / AV-WMS / Grundbuchplan</li>
+			<li>Praktisch, falls Grundlagenkarte aus vielen einzelnen Layern/Datensätzen besteht.</li>
+			<li>Einbinden der Grundlagenkarten-WMS-Layer in QGIS-Webclient.</li>
+		</ul>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Testbedingungen</h2>
+		<ul>
+			<li>Hetzner-Server:</li>
+			<ul>
+				<li>Intel i7-3770 (4 Cores, 8 Threads, 3.4 - 3.9 GHz)</li>
+				<li>16 GB RAM</li>
+				<li>2 x 3 TB HDD (7200 rpm, Software-RAID 1)</li>
+			</ul>
+			<li>Ubuntu 10.04</li>
+			<li>PostgreSQL 8.4 / Postgis 2.0</li>
+			<li>QGIS enterprise 13.03b</li>
+			<li>JMeter, Datenbank und QGIS auf dem gleichen Server</li>
+		</ul>
+	</div></section>
+	
+	<section class="slide"><div>
+		<h2>fcgid.conf</h2>
+		<pre style="font-size:50%;">
+			<code style="line-height:20px;">&lt;IfModule mod_fcgid.c&gt;</code>
+			<code style="line-height:20px;">  AddHandler fcgid-script .fcgi</code>
+			<code style="line-height:20px;">  FcgidConnectTimeout 600</code>
+			<code style="line-height:20px;">  FcgidIdleTimeout 0</code>
+			<code style="line-height:20px;">  FcgidMaxRequestLen 134217728</code>
+			<code style="line-height:20px;">  FcgidMaxProcesses <mark class="important">50</mark></code>
+			<code style="line-height:20px;">  FcgidMinProcessesPerClass 0</code>
+			<code style="line-height:20px;">  FcgidMaxProcessesPerClass 20</code>
+			<code style="line-height:20px;">  SocketPath /var/lib/apache2/fcgid/sock</code>
+			<code style="line-height:20px;">  IPCConnectTimeout 8</code>
+			<code style="line-height:20px;">  ProcessLifeTime 7200</code>	
+			<code style="line-height:20px;">  IPCCommTimeout  7200</code>
+			<code style="line-height:20px;">  IPCConnectTimeout 300</code>	
+			<code style="line-height:20px;">  FcgidInitialEnv LD_LIBRARY_PATH /usr/local/qgis/qgis_enterprise/lib</code>
+			<code style="line-height:20px;">  FcgidInitialEnv DISPLAY :99</code>	
+			<code style="line-height:20px;">  FcgidInitialEnv LANG=de_CH.UTF-8</code>																
+			<code style="line-height:20px;">&lt;/IfModule&gt;</code>
+		</pre>
+	</div></section>
+	
+	<section class="slide"><div>
+		<h2>Eichung</h2>
+		<ul>
+			<li>Vergleich mit Resultaten von Sourcepole (FOSSGIS 2013)</li>
+			<li>AV-WMS: zufällige Ausschnitte 1:800 - 1:5'000</li>
+			<li>Ausgabeformat: png8</li>
+		</ul>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Eichung</h2>
+		<table>
+		<tr>
+			<th scope="col">N Requests</th>
+			<th>Sourcepole (Req/s)</th>
+			<th>Hetzner (Req/s)</th>
+		</tr>
+		<tr>
+			<th scope="row">1</th>
+			<td>7.7</td>
+			<td>6.3</td>
+		</tr>
+		<tr>
+			<th scope="row">2</th>
+			<td>16.4</td>
+			<td>14.0</td>
+		</tr>
+		<tr>
+			<th scope="row">4</th>
+			<td>27.4</td>
+			<td>23.7</td>
+		</tr>
+		<tr>
+			<th scope="row">8</th>
+			<td>26.7</td>
+			<td>30.5</td>
+		</tr>
+		<tr>
+			<th scope="row">16</th>
+			<td>25.0</td>
+			<td>33.7</td>
+		</tr>
+		<tr>
+			<th scope="row">32</th>
+			<td>29.7</td>
+			<td>35.4</td>
+		</tr>
+		<tr>
+			<th scope="row">64</th>
+			<td>27.1</td>
+			<td>35.6</td>
+		</tr>						
+		</table>	
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Benchmark</h2>
+		<ul>
+			<li>Zufällige <i>BBOX-</i>, <i>WIDTH-</i> und <i>HEIGHT-</i>Werte erzeugt mit <code>wms_request.py -count 1000 -region 590000 210000 650000 270000 -maxres 20 -minres 0.01 -maxsize 1920 1080 -minsize 500 300 -srs 21781 -filter_within ../data/geo_gemeinden_v.shp</code></li>
+			<li><strong>Achtung:</strong> Original-Skript (Zeile 213) verlangt, dass BBOX <em>komplett innerhalb</em> des Datensatz liegen. &rarr; neu <em>Intersects</em> statt <em>Contains</em></li>
+		</ul>
+	</div></section>
+	
+	<section class="slide"><div>
+		<h2>Benchmark</h2>
+		<ul>
+			<li>Drei Ansätze = drei QGIS-Projekte = drei WMS-Dienste:</li>
+			<ol>
+				<li><em>direkt:</em> Layer werden in QGIS direkt geladen, z.B. VRT-Layer für Orthofotos, Postgis für Vektordaten.</li>
+				<li><em>embedded:</em> Layer werden via QGIS-Projekt geladen (&laquo;Embed Layers and Groups...&raquo;).</li>
+				<li><em>wms:</em> Layer wird von (1) als WMS in QGIS-Projekt geladen (aka Kaskadieren).</li>
+			</ol>
+		</ul>
+	</div></section>	
+
+	<section class="slide"><div>
+		<h2>Benchmark</h2>
+		<ul>
+			<li>Beispiele:</li>
+			<ol>
+				<li><a href="http://www.catais.org/wms/orthofoto_direkt?SERICE=WMS&REQUEST=GetCapabilities">http://www.catais.org/wms/orthofoto_direkt</a></li>
+				<li><a href="http://www.catais.org/wms/orthofoto_embedded?SERICE=WMS&REQUEST=GetCapabilities">http://www.catais.org/wms/orthofoto_embedded</a></li>
+				<li><a href="http://www.catais.org/wms/orthofoto_wms?SERICE=WMS&REQUEST=GetCapabilities">http://www.catais.org/wms/orthofoto_wms</a></li>
+			</ol>
+		</ul>
+	</div></section>	
+
+	<section class="slide"><div>
+		<h2>Benchmark</h2>
+		<ul>
+			<li>Tests mit:</li>
+			<ol>
+				<li>AV-WMS</li>
+				<li>Plan für das Grundbuch</li>
+				<li>Basisplan</li>
+				<li>Orthofoto</li>
+				<li>Kombination (Orthofoto und Basisplan/Plan für das Grundbuch)</li>
+			</ol>
+			<li>Jeweils <em>drei</em> Durchgänge &rarr; mittlerer Wert verwendet.</li>
+			<li>Ausgabeformat: 24bit PNG</li>
+		</ul>
+	</div></section>	
+
+	<section class="slide cover" id="avwms"><div>
+		<h2 style="color:#FFF;">AV-WMS</h2>
+		<img src="pictures/avwms.png" alt="">
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>AV-WMS</h2>
+		<ul>
+			<li>AV-WMS farbig</li>			
+			<li>23 Vektorlayer</li>
+			<li>Datenhaltung in PostgreSQL/Postgis-Datenbank</li>
+			<li>Datendefinierte Beschriftung</li>			
+			<li>Labelbuffer grosszügig vewendet</li>
+			<li>Wenig gestrichelte Linien</li>
+		</ul>
+	</div></section>
+
+	<section class="slide" id="avwms_bench"><div>
+		<img style="margin-top: -80px;" src="pictures/avwms_bench.png" alt="">
+	</div></section>
+
+
+
+	<section class="slide"><div>
+		<h2>Links</h2>
+		<ul>
+			<li>os geo benachmark svn</li>
+			<li>Resultate Marco</li>
+		</ul>
+	</div></section>
+	
+	
+	<section class="slide"><div>
+		<h2>All Kind of Lists</h2>
+		<ol>
+			<li>Simple lists are marked with bullets</li>
+			<li>Ordered lists begin with a number</li>
+			<li>You can even nest lists one inside another
+				<ul>
+					<li>Or mix their types</li>
+					<li>But do not go too far</li>
+					<li>Otherwise audience will be bored</li>
+				</ul>
+			</li>
+			<li>Look, seven rows exactly!</li>
+		</ol>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Serious Citations</h2>
+		<figure>
+			<blockquote>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
+			</blockquote>
+			<figcaption>Marcus Tullius Cicero</figcaption>
+		</figure>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Code Samples</h2>
+		<pre>
+			<code>&lt;!DOCTYPE html&gt;</code>
+			<code>&lt;html lang="en"&gt;</code>
+			<code><mark>&lt;head&gt;</mark> <mark class="comment">&lt;!--Comment--&gt;</mark></code>
+			<code>    &lt;title&gt;Shower&lt;/title&gt;</code>
+			<code>    &lt;meta charset="<mark class="important">UTF-8</mark>"&gt;</code>
+			<code>    &lt;link rel="stylesheet" href="screen.css"&gt;</code>
+			<code><mark>&lt;/head&gt;</mark></code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Even Tables</h2>
+		<table>
+		<tr>
+			<th scope="col">Locavore</th>
+			<th>Umami</th>
+			<th>Helvetica</th>
+			<th>Vegan</th>
+		</tr>
+		<tr>
+			<th scope="row">Fingerstache</th>
+			<td>Kale</td>
+			<td>Chips</td>
+			<td>Keytar</td>
+		</tr>
+		<tr>
+			<th scope="row">Sriracha</th>
+			<td>Gluten-free</td>
+			<td>Ennui</td>
+			<td>Keffiyeh</td>
+		</tr>
+		<tr>
+			<th scope="row">Thundercats</th>
+			<td>Jean</td>
+			<td>Shorts</td>
+			<td>Biodiesel</td>
+		</tr>
+		<tr>
+			<th scope="row">Terry</th>
+			<td>Richardson</td>
+			<td>Swag</td>
+			<td>Blog</td>
+		</tr>
+		</table>
+		<p>It’s good to have information organized.</p>
+	</div></section>
+
+	<section class="slide shout"><div>
+		<h2>You can even shout this way</h2>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Inner Navigation</h2>
+		<ol>
+			<li>Lets you reveal list items one by one</li>
+			<li class="next">To keep some key points</li>
+			<li class="next">In secret from audience</li>
+			<li class="next">But it will work only once</li>
+			<li class="next">Nobody wants to see the same joke twice</li>
+		</ol>
+	</div></section>
+	<section class="slide shout" id="SeeMore"><div>
+		<h2><img src="pictures/logo.svg" alt=""> <a href="https://github.com/shower/shower/">See more on GitHub</a></h2>
+		<style>
+			#Picture h2 {
+				color:#FFF;
+				}
+			#SeeMore h2 {
+				font-size:100px
+				}
+			#SeeMore img {
+				width:0.72em;
+				height:0.72em;
+				}
+		</style>
+	</div></section>
+	<p class="badge"><a href="https://github.com/shower/shower">Fork me on Github</a></p>
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<div class="progress"><div></div></div>
+	<script src="shower/shower.min.js"></script>
+	<!-- Copyright © 2013 Yours Truly, Famous Inc. -->
+	<!-- Photos by John Carey, fiftyfootshadows.net -->
+</body>
+</html>
