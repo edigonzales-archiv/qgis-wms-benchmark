@@ -9,8 +9,8 @@
 </head>
 <body class="list">
 	<header class="caption">
-		<h1>Shower Presentation Engine</h1>
-		<p>Yours Truly, Famous Inc.</p>
+		<h1>QGIS server vs. QGIS server</h1>
+		<p>Stefan Ziegler&mdash;Amt für Geoinformation Kanton Solothurn</p>
 	</header>
 	<section class="slide cover" id="Cover"><div>
 		<h2>QGIS Server vs. QGIS Server</h2>
@@ -226,7 +226,7 @@
 			<li>Datenhaltung in PostgreSQL/Postgis-Datenbank</li>
 			<li>Datendefinierte Beschriftung</li>			
 			<li>Labelbuffer grosszügig verwendet</li>
-			<li>Wenig gestrichelte Linien</li>
+			<li>Wenig gestrichelte Linien/Umrandungen</li>
 		</ul>
 	</div></section>
 
@@ -238,137 +238,148 @@
 		<h2>Upsi?!</h2>
 	</div></section>
 
+	<section class="slide" id="avwms_bench_resp"><div>
+		<img style="margin-top: -80px;" src="pictures/avwms_bench_resp.png" alt="">
+	</div></section>
+
+	<section class="slide cover" id="grundbuchplan"><div>
+		<h2 style="color:#000;">Plan für das Grundbuch</h2>
+		<img src="pictures/grundbuchplan.png" alt="">
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Plan für das Grundbuch</h2>
+		<ul>
+			<li>circa 70 Vektorlayer (massstabsabhängig)</li>
+			<li>Datenhaltung in PostgreSQL/Postgis-Datenbank</li>
+			<li>Datendefinierte Beschriftung</li>			
+			<li>Labelbuffer grosszügig verwendet</li>
+			<li>Gestrichelte Linien/Umrandungen</li>
+		</ul>
+	</div></section>
+
+	<section class="slide" id="grundbuchplan_bench"><div>
+		<img style="margin-top: -80px;" src="pictures/grundbuchplan_bench.png" alt="">
+	</div></section>
+
+	<section class="slide" id="grundbuchplan_bench_resp"><div>
+		<img style="margin-top: -80px;" src="pictures/grundbuchplan_bench_resp.png" alt="">
+	</div></section>
+
+	<section class="slide cover" id="basisplan"><div>
+		<h2 style="color:#000;">Basisplan</h2>
+		<img src="pictures/basisplan.png" alt="">
+	</div></section>
+	
+	<section class="slide"><div>
+		<h2>Basisplan</h2>
+		<ul>
+			<li>schwarz-weiss</li>
+			<li>38 GeoTIFF (1 VRT)</li>
+			<li>17500 x 12000 Pixel</li>
+			<li>Resampling-Methode: Bilinear</li>			
+			<li>Oversampling-Faktor: 4.0</li>
+		</ul>
+	</div></section>
+
+	<section class="slide" id="basisplan_bench"><div>
+		<img style="margin-top: -80px;" src="pictures/basisplan_bench.png" alt="">
+	</div></section>
+
+	<section class="slide" id="basisplan_bench_resp"><div>
+		<img style="margin-top: -80px;" src="pictures/basisplan_bench_resp.png" alt="">
+	</div></section>
+
+	<section class="slide cover" id="orthofoto"><div>
+		<h2 style="color:#FFF;">Orthofoto</h2>
+		<img src="pictures/orthofoto.jpg" alt="">
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Orthofoto</h2>
+		<ul>
+			<li>circa 680 GeoTIFF (3 VRT)</li>
+			<li>12.5 cm (8000 x 8000 Pixel)</li>
+			<li>3 einzelne GeoTIFF (5 m)</li>
+			<li>Resampling-Methode: Nearest Neighbour</li>			
+		</ul>
+	</div></section>
+
+	<section class="slide" id="orthofoto_bench"><div>
+		<img style="margin-top: -80px;" src="pictures/orthofoto_bench.png" alt="">
+	</div></section>
+
+	<section class="slide" id="orthofoto_bench_resp"><div>
+		<img style="margin-top: -80px;" src="pictures/orthofoto_bench_resp.png" alt="">
+	</div></section>
+
+	<section class="slide cover" id="kombination"><div>
+		<h2 style="color:#FFF;">Kombination</h2>
+		<img src="pictures/kombination.jpg" alt="">
+	</div></section>
+	
+	<section class="slide"><div>
+		<h2>Kombination</h2>
+		<ul>
+			<li>Orthofoto und Basisplan/Plan für das Grundbuch</li>
+			<li>Plan für das Grundbuch &lt; 1:6'000</li>
+			<li>Basisplan &lt; 1:50'000</li>
+			<li>Resampling-Methode (Orthofoto): Nearest Neighbour</li>			
+		</ul>
+	</div></section>
+
+	<section class="slide" id="kombination_bench"><div>
+		<img style="margin-top: -80px;" src="pictures/kombination_bench.png" alt="">
+	</div></section>
+
+	<section class="slide" id="kombination_bench_resp"><div>
+		<img style="margin-top: -80px;" src="pictures/kombination_bench_resp.png" alt="">
+	</div></section>
 
 
 	<section class="slide"><div>
 		<h2>Fragen</h2>
 		<ul>
-			<li>Einbruch?</li>
-			<li>Software-RAID?</li>
-			<li>Apache/FCGI-Einstellungen?</li>
-			<li>Sogis-infrastruktur? Tests wiederholen (Raster via UMN Mapserver)</li>
+			<li>Warum dieser massive Einbruch beim Kaskadieren?</li>
+			<ul>
+				<li>Software-RAID?</li>
+				<li>Apache/FCGI-Einstellungen?</li>
+			</ul>
+			<li>Reproduzierbar in SO!GIS-Infrastruktur?</li>
+			<ul>
+				<li>Rasterdaten via UMN Mapserver</li>
+				<li>AV-WMS via QGIS server</li>				
+				<li>Besserer Speicherlösung (keine Software-RAID)</li>
+			</ul>
+			
 		</ul>
 	</div></section>	
 	
 	<section class="slide"><div>
 		<h2>Fazit</h2>
 		<ul>
-			<li>Möglicht Daten "direkt" verwenden</li>
-			<li>Sehr Unschön für Vektorlayergruppen: einzelne Layer sichtbar in Webclient -> schlaue Gruppen, dh. einzelne Layer verstecken </li>
-			<li>Nicht soooo super schlimm für Raster</li>
+			<li>Daten möglichst &laquo;direkt&raquo; in QGIS-Projekt einbinden:</li>
+			<ul>
+				<li>Sehr unschön für Vektorlayergruppen, dh. einzelne Layer sind sichtbar in Webclient.</li>
+				<li>Weniger tragisch für Rasterdaten.</li>
+			</ul>
+			<li>&rarr; Einführen von &laquo;intelligenten&raquo; Gruppen:</li>
+			<ul>
+				<li>Untergruppen und Layer nicht sichtbar in QGIS-Webclient.</li>
+				<li>Weitere Gruppeneigenschaften, z.B. eigene massstabsabhängige Sichtbarkeit etc.</li>
+			</ul>
 		</ul>
 	</div></section>
 
 	<section class="slide"><div>
 		<h2>Links</h2>
 		<ul>
-			<li>os geo benachmark svn</li>
-			<li>Resultate Marco</li>
+			<li><a href="http://wiki.osgeo.org/wiki/FOSS4G_Benchmark">FOSS4G Benchmark Wiki</a></li>
+			<li><a href="http://sourcepole.ch/assets/2013/6/17/fossgis_2013_performanceoptimierte_wms_dienste.pdf">Präsentation/Resultate FOSSGIS 2013</a></li>
 		</ul>
 	</div></section>
 	
 	
-	<section class="slide"><div>
-		<h2>All Kind of Lists</h2>
-		<ol>
-			<li>Simple lists are marked with bullets</li>
-			<li>Ordered lists begin with a number</li>
-			<li>You can even nest lists one inside another
-				<ul>
-					<li>Or mix their types</li>
-					<li>But do not go too far</li>
-					<li>Otherwise audience will be bored</li>
-				</ul>
-			</li>
-			<li>Look, seven rows exactly!</li>
-		</ol>
-	</div></section>
-	<section class="slide"><div>
-		<h2>Serious Citations</h2>
-		<figure>
-			<blockquote>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
-			</blockquote>
-			<figcaption>Marcus Tullius Cicero</figcaption>
-		</figure>
-	</div></section>
-	<section class="slide"><div>
-		<h2>Code Samples</h2>
-		<pre>
-			<code>&lt;!DOCTYPE html&gt;</code>
-			<code>&lt;html lang="en"&gt;</code>
-			<code><mark>&lt;head&gt;</mark> <mark class="comment">&lt;!--Comment--&gt;</mark></code>
-			<code>    &lt;title&gt;Shower&lt;/title&gt;</code>
-			<code>    &lt;meta charset="<mark class="important">UTF-8</mark>"&gt;</code>
-			<code>    &lt;link rel="stylesheet" href="screen.css"&gt;</code>
-			<code><mark>&lt;/head&gt;</mark></code>
-		</pre>
-	</div></section>
-	<section class="slide"><div>
-		<h2>Even Tables</h2>
-		<table>
-		<tr>
-			<th scope="col">Locavore</th>
-			<th>Umami</th>
-			<th>Helvetica</th>
-			<th>Vegan</th>
-		</tr>
-		<tr>
-			<th scope="row">Fingerstache</th>
-			<td>Kale</td>
-			<td>Chips</td>
-			<td>Keytar</td>
-		</tr>
-		<tr>
-			<th scope="row">Sriracha</th>
-			<td>Gluten-free</td>
-			<td>Ennui</td>
-			<td>Keffiyeh</td>
-		</tr>
-		<tr>
-			<th scope="row">Thundercats</th>
-			<td>Jean</td>
-			<td>Shorts</td>
-			<td>Biodiesel</td>
-		</tr>
-		<tr>
-			<th scope="row">Terry</th>
-			<td>Richardson</td>
-			<td>Swag</td>
-			<td>Blog</td>
-		</tr>
-		</table>
-		<p>It’s good to have information organized.</p>
-	</div></section>
-
-	<section class="slide shout"><div>
-		<h2>You can even shout this way</h2>
-	</div></section>
-	<section class="slide"><div>
-		<h2>Inner Navigation</h2>
-		<ol>
-			<li>Lets you reveal list items one by one</li>
-			<li class="next">To keep some key points</li>
-			<li class="next">In secret from audience</li>
-			<li class="next">But it will work only once</li>
-			<li class="next">Nobody wants to see the same joke twice</li>
-		</ol>
-	</div></section>
-	<section class="slide shout" id="SeeMore"><div>
-		<h2><img src="pictures/logo.svg" alt=""> <a href="https://github.com/shower/shower/">See more on GitHub</a></h2>
-		<style>
-			#Picture h2 {
-				color:#FFF;
-				}
-			#SeeMore h2 {
-				font-size:100px
-				}
-			#SeeMore img {
-				width:0.72em;
-				height:0.72em;
-				}
-		</style>
-	</div></section>
 	<p class="badge"><a href="https://github.com/shower/shower">Fork me on Github</a></p>
 	<!--
 		To hide progress bar from entire presentation
