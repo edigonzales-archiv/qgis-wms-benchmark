@@ -39,6 +39,7 @@ def Usage():
     print '                    [-maxsize width height] [-minsize width height]'
     print '                    [-srs <epsg_code>] [-srs2 <epsg_code>]'
     print '                    [-filter_within <filename>]'
+    print '                    [-filter_intersects <filename>]'
     sys.exit(1)
 
 # =============================================================================
@@ -54,6 +55,7 @@ if __name__ == '__main__':
 
     # filter
     filter_within = None
+    filter_intersects = None
     geometry_collection = None
     dataset = None
 
@@ -101,6 +103,10 @@ if __name__ == '__main__':
         elif arg == '-filter_within' and i < len(argv)-1:
             filter_within = argv[i+1]
             i = i + 1
+            
+        elif arg == '-filter_intersects' and i < len(argv)-1:
+            filter_within = argv[i+1]
+            i = i + 1
 
         elif arg == '-srs' and i < len(argv)-1:
             srs_input = int(argv[i+1])
@@ -128,7 +134,7 @@ if __name__ == '__main__':
         print '-maxres is required.'
         Usage()
         
-    if filter_within is not None:
+    if filter_within is not None or filter_intersects is not None:
 
         try:
             from osgeo import ogr, osr
@@ -211,8 +217,13 @@ if __name__ == '__main__':
                 wkt = "POLYGON((" + str(bbox[0]) + " " + str(bbox[1]) + "," + str(bbox[2]) + " " + str(bbox[1]) + "," + str(bbox[2]) + " " + str(bbox[3]) + "," + str(bbox[0]) + " " + str(bbox[3]) + "," + str(bbox[0]) + " " + str(bbox[1]) +"))"
                 polygon = ogr.CreateGeometryFromWkt(wkt)
                 if geometry_collection.Contains(polygon) is False:
-                #if geometry_collection.Intersects(polygon) is False:
                     continue
+                    
+            if filter_within is not None:
+                wkt = "POLYGON((" + str(bbox[0]) + " " + str(bbox[1]) + "," + str(bbox[2]) + " " + str(bbox[1]) + "," + str(bbox[2]) + " " + str(bbox[3]) + "," + str(bbox[0]) + " " + str(bbox[3]) + "," + str(bbox[0]) + " " + str(bbox[1]) +"))"
+                polygon = ogr.CreateGeometryFromWkt(wkt)
+                if geometry_collection.Intersects(polygon) is False:
+                    continue                    
 
             if srs_output is not None:
                 # transform the bbox to srs2 mercator 
